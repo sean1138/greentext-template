@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>greentext template</title>
+	<style>
+		:root{
+			--bgc1: #F0E0D6;
+			--bgc2: #FFFFEE;
+		}
+		body {
+			display: flex;
+			flex-direction: column;
+			place-content: center;
+			place-items: center;
+			height: 100vh;
+			box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+			font-family: arial, helvetica, sans-serif;
+			font-size: 10pt;
+			background: var(--bgc2);
+			color: #800000;
+		}
+
+		section {}
+
+		div {
+			background: var(--bgc1);
+		}
+		div:has(main){
+			margin: 1rem;
+		}
+
+		main {
+			display: flex;
+			flex-direction: column;
+		}
+		span.name {
+			color: #117743;
+			font-weight: bold;
+		}
+		.posteruid .hand {
+			padding: 0 5px;
+			border-radius: 6px;
+			font-size: 0.8em;
+		}
+		.flag {
+			display: inline-block;
+			width: 16px;
+			height: 11px;
+			position: relative;
+			top: 1px;
+			background: url('flags.png') no-repeat;
+			background-position: -32px -24px;
+		}
+
+		textarea {
+			box-sizing: border-box;
+			display: block;
+			padding: 10pt 40px;
+			width: 90%;
+			height: auto;
+			min-height: fit-content;
+			border: none;
+			resize: none;
+			order: 2;
+			color: #789922;
+			background: var(--bgc1);
+			font-family: arial, helvetica, sans-serif;
+			font-size: 10pt;
+		}
+		details{
+			cursor:pointer;
+		}
+
+		/* only color, background-color, cursor, outline, text-decoration, text-emphasis-color and text-shadow */
+		::selection {
+			color: hsla(28, 0%, 95%, 1);
+			background: hsla(0, 100%, 5%, 1);
+
+			/*		background:linear-gradient(to bottom, hsla(10, 23%, 16%, 1), hsla(0, 100%, 1%, 1));*/
+		}
+	</style>
+</head>
+
+<body>
+
+	<section>
+		<div>
+
+			<main>
+				<div class="postInfo desktop"><input type="checkbox"> <span class="nameBlock"><span class="name">Anonymous</span> <span class="posteruid">(ID: <span id="randomStringSpan" class="hand" title="Highlight posts by this ID" style="background-color: rgb(49, 168, 232); color: black;">8008135!</span>)</span> <span title="Norway" class="flag flag-no"></span></span> <span class="dateTime" data-utc="1733854490">12/10/24(Tue)13:14:50</span> <span class="postNum desktop"></div>
+				<textarea name="woo" id="woo1" cols="80" rows="3" spellcheck="false">> be me &#13;> ask chatgpt how to add > to each new line &#13;> mfw it works</textarea>
+			</main>
+		</div>
+	</section>
+	<details class="controls">
+			<summary>Options/Controls</summary>
+			<fieldset>
+					<legend>Modify ID and Flag</legend>
+					<button id="generateStringButton">Change ID</button>
+					<button id="changeColorButton">Change ID Color</button>
+					<button id="changeFlagButton">Change Flag</button>
+			</fieldset>
+
+			<fieldset>
+					<legend>Set or Generate Date and Time</legend>
+					<button id="randomDateButton" aria-label="Generate Random Date">Random Date</button>
+					<label for="manualDatePicker">Select Date:</label>
+					<input type="date" id="manualDatePicker" aria-labelledby="setDateButton">
+					<label for="manualTimePicker">Select Time:</label>
+					<input type="time" id="manualTimePicker" value="00:00" aria-labelledby="setDateButton">
+					<button id="setDateButton">Set Selected Date and Time</button>
+			</fieldset>
+
+			<fieldset>
+					<legend>Other Options</legend>
+					<button id="toggle" aria-label="Toggle textarea resizing">Resize Textarea?</button>
+			</fieldset>
+	</details>
+
+	<script>
+		// random ID string gen
+		function generateRandomString(length) {
+				const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+				let result = "";
+				for (let i = 0; i < length; i++) {
+						const randomIndex = Math.floor(Math.random() * chars.length);
+						result += chars[randomIndex];
+				}
+				return result;
+		}
+		document.getElementById("generateStringButton").addEventListener("click", function () {
+				const randomString = generateRandomString(8);
+				document.getElementById("randomStringSpan").textContent = randomString;
+		});
+
+		// change ID bgc
+		const darkBgColors = ["blue", "green", "purple", "teal"]; // Colors needing white text
+		const lightBgColors = ["yellow", "orange", "pink", "lightgray"]; // Colors needing black text
+		let currentIndex = 0; // Tracks the current color index
+		let useDarkColors = true; // Toggles between color sets
+
+		document.getElementById("changeColorButton").addEventListener("click", function () {
+				const spanElement = document.querySelector("span#randomStringSpan");
+
+				// Choose the appropriate color set
+				const colors = useDarkColors ? darkBgColors : lightBgColors;
+
+				// Set the background color and text color
+				spanElement.style.backgroundColor = colors[currentIndex];
+				spanElement.style.color = useDarkColors ? "white" : "black";
+
+				// Move to the next color in the array
+				currentIndex = (currentIndex + 1) % colors.length;
+
+				// Toggle color set if at the end of one set
+				if (currentIndex === 0) {
+						useDarkColors = !useDarkColors;
+				}
+		});
+		// change flag
+		document.getElementById("changeFlagButton").addEventListener("click", function () {
+				const spanFlag = document.querySelector("span.flag");
+
+				// Define sprite sheet configurations
+				const spriteSheets = [
+						{
+								url: "flags.png",       // Sprite 1
+								columns: 5,            // Number of flags per row (80px wide / 16px per flag)
+								rows: 5,               // Number of rows (60px tall / 12px per flag)
+								flagHeight: 12         // Height of each flag in this sprite
+						},
+						{
+								url: "flags.8.png",    // Sprite 2
+								columns: 16,           // Number of flags per row (256px wide / 16px per flag)
+								rows: 17,              // Number of rows (187px tall / 11px per flag)
+								flagHeight: 11         // Height of each flag in this sprite
+						}
+				];
+
+				// Randomly select a sprite sheet
+				const sprite = spriteSheets[Math.floor(Math.random() * spriteSheets.length)];
+
+				// Calculate total number of flags in the selected sprite
+				const totalFlags = sprite.columns * sprite.rows;
+
+				// Randomly select a flag from the selected sprite
+				const flagIndex = Math.floor(Math.random() * totalFlags);
+				const col = flagIndex % sprite.columns; // Column (x position)
+				const row = Math.floor(flagIndex / sprite.columns); // Row (y position)
+
+				// Set the flag's background image and position
+				spanFlag.style.backgroundImage = `url('${sprite.url}')`;
+				spanFlag.style.backgroundPositionX = `-${col * 16}px`; // Move x by flag width
+				spanFlag.style.backgroundPositionY = `-${row * sprite.flagHeight}px`; // Adjust y by flag height
+				spanFlag.style.backgroundSize = `${sprite.columns * 16}px ${sprite.rows * sprite.flagHeight}px`; // Ensure scaling matches flag sizes
+		});
+
+		// set and change the date
+		document.addEventListener("DOMContentLoaded", function () {
+				const dateTimeSpan = document.querySelector(".dateTime");
+
+				// Display the current date and time when the page loads
+				function updateCurrentDateTime() {
+						const now = new Date();
+						dateTimeSpan.textContent = formatDate(now);
+				}
+
+				// Format a date into "MM/DD/YY(Day)HH:mm:ss"
+				function formatDate(date) {
+						const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+						const month = String(date.getMonth() + 1).padStart(2, "0");
+						const day = String(date.getDate()).padStart(2, "0");
+						const year = String(date.getFullYear()).slice(-2);
+						const hours = String(date.getHours()).padStart(2, "0");
+						const minutes = String(date.getMinutes()).padStart(2, "0");
+						const seconds = String(date.getSeconds()).padStart(2, "0");
+						const dayName = days[date.getDay()];
+
+						return `${month}/${day}/${year}(${dayName})${hours}:${minutes}:${seconds}`;
+				}
+
+				// Generate a random date between Oct 1, 2003, and today
+				function getRandomDate() {
+						const start = new Date("2003-10-01").getTime(); // Oct 1, 2023
+						const end = new Date().getTime(); // Today's date
+						const randomTime = Math.floor(Math.random() * (end - start + 1)) + start;
+						return new Date(randomTime);
+				}
+
+				// Set date and time from the date and time pickers
+				function setManualDate() {
+						const dateInput = document.getElementById("manualDatePicker").value; // Get selected date
+						const timeInput = document.getElementById("manualTimePicker").value; // Get selected time
+
+						if (dateInput) {
+								// Create a new Date object from the selected date
+								const selectedDate = new Date(dateInput);
+
+								// If a time is provided, update the hours and minutes
+								if (timeInput) {
+										const [hours, minutes] = timeInput.split(":").map(Number); // Split the time string into hours and minutes
+										selectedDate.setHours(hours, minutes, 0); // Set hours, minutes, and seconds to the selected time
+								}
+
+								// Update the span with the formatted date and time
+								const dateTimeSpan = document.querySelector(".dateTime");
+								dateTimeSpan.textContent = formatDate(selectedDate);
+						} else {
+								alert("Please select a date!");
+						}
+				}
+
+
+				// Attach event listeners
+				document.getElementById("randomDateButton").addEventListener("click", function () {
+						const randomDate = getRandomDate();
+						dateTimeSpan.textContent = formatDate(randomDate);
+				});
+
+				document.getElementById("setDateButton").addEventListener("click", setManualDate);
+
+				// Initialize the current date and time
+				updateCurrentDateTime();
+		});
+
+
+		// autosize the textarea
+		document.addEventListener("input", function (event) {
+				if (event.target.tagName === "TEXTAREA" && event.target.id === "woo1") {
+						event.target.style.height = "auto"; // Reset height to calculate the new height
+						event.target.style.height = event.target.scrollHeight + "px"; // Adjust height
+				}
+		});
+		// insert char at start of each new line
+		document.getElementById("woo1").addEventListener("keydown", function (event) {
+				// Check if the Enter key is pressed
+				if (event.key === "Enter") {
+						// Prevent the default new line behavior
+						event.preventDefault();
+
+						// Get the current caret position
+						const cursorPosition = this.selectionStart;
+
+						// Insert a new line followed by ">"
+						const textBeforeCursor = this.value.substring(0, cursorPosition);
+						const textAfterCursor = this.value.substring(cursorPosition);
+						this.value = textBeforeCursor + "\n> " + textAfterCursor;
+
+						// Move the caret to the correct position after the new ">" symbol
+						this.selectionStart = this.selectionEnd = cursorPosition + 3; // 3 accounts for `\n> `
+				}
+		});
+	</script>
+</body>
+
+</html>
