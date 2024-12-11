@@ -401,7 +401,7 @@
 	</header>
 	<main>
 		<section class="first">
-			<div class="post">
+			<div id="zoomer" class="post">
 				<div class="postInfo desktop"><input type="checkbox"> <span class="nameBlock"><span class="name">Anonymous</span> <span class="posteruid">(ID: <span id="randomStringSpan" class="hand" title="Highlight posts by this ID" style="background-color: rgb(49, 168, 232); color: black;">8008135!</span>)</span> <span class="flag"></span></span> <span class="dateTime" data-utc="1733854490">12/10/24(Tue)13:14:50</span></div>
 					<textarea name="woo" id="woo1" cols="80" rows="3" spellcheck="false">>be me &#13;>ask chatgpt how to add > to each new line &#13;>mfw it works</textarea>
 				</div>
@@ -415,6 +415,16 @@
 							<button id="changeColorButton">Change ID Color</button>
 							<button id="changeFlagButton">Change Flag</button>
 							<button id="randomDateButton" aria-label="Generate Random Date">Change Date</button>
+							<label for="zoomSelector">Set Zoom:</label>
+							<select id="zoomSelector">
+							    <option value="100%">100%</option>
+							    <option value="110%">110%</option>
+							    <option value="125%">125%</option>
+							    <option value="150%">150%</option>
+							    <option value="175%">175%</option>
+							    <option value="180%">180%</option>
+							    <option value="200%">200%</option>
+							</select>
 					</fieldset>
 					<fieldset>
 							<legend>Set Specific Date and Time</legend>
@@ -627,13 +637,21 @@
 		// Reference to the dropdown and the body element
 		const themeSelector = document.getElementById("themeSelector");
 		const body = document.body;
-
 		// Default class for the body
 		body.className = "yotsuba";
-
 		// Event listener to change the class on the body when the selection changes
 		themeSelector.addEventListener("change", () => {
 		    body.className = themeSelector.value;
+		});
+
+		// Reference to the dropdown and the zoom element
+		const zoomSelector = document.getElementById("zoomSelector");
+		const e = document.getElementById("zoomer");
+		// Default class for the zoom e
+		e.style.zoom = "100%";
+		// Event listener to change the style on the zoom e when the selection changes
+		zoomSelector.addEventListener("change", () => {
+		    e.style.zoom = zoomSelector.value;
 		});
 
 		// dialog modal
