@@ -263,7 +263,7 @@
 		}
 		main{
 			display: flex;
-			  flex-direction: column;
+				flex-direction: column;
 			width:100%;
 		}
 		section.first{
@@ -403,65 +403,160 @@
 		<section class="first">
 			<div id="zoomer" class="post">
 				<div class="postInfo desktop"><input type="checkbox"> <span class="nameBlock"><span class="name">Anonymous</span> <span class="posteruid">(ID: <span id="randomStringSpan" class="hand" title="Highlight posts by this ID" style="background-color: rgb(49, 168, 232); color: black;">8008135!</span>)</span> <span class="flag"></span></span> <span class="dateTime" data-utc="1733854490">12/10/24(Tue)13:14:50</span></div>
-					<textarea name="woo" id="woo1" cols="80" rows="3" spellcheck="false">>be me &#13;>ask chatgpt how to add > to each new line &#13;>mfw it works</textarea>
-				</div>
+				<textarea name="woo" id="woo1" cols="80" rows="3" spellcheck="false">>be me &#13;>ask chatgpt how to add > to each new line &#13;>mfw it works</textarea>
+			</div>
 		</section>
 		<section class="second">
 			<details class="controls">
-					<summary>Options/Controls</summary>
-					<fieldset>
-							<legend>Random Things</legend>
-							<button id="generateStringButton">Change ID</button>
-							<button id="changeColorButton">Change ID Color</button>
-							<button id="changeFlagButton">Change Flag</button>
-							<button id="randomDateButton" aria-label="Generate Random Date">Change Date</button>
-							<label for="zoomSelector">Set Zoom:</label>
-							<select id="zoomSelector">
-							    <option value="100%">100%</option>
-							    <option value="110%">110%</option>
-							    <option value="125%">125%</option>
-							    <option value="150%">150%</option>
-							    <option value="175%">175%</option>
-							    <option value="180%">180%</option>
-							    <option value="200%">200%</option>
-							</select>
-					</fieldset>
-					<fieldset>
-							<legend>Set Specific Date and Time</legend>
-							<label for="manualDatePicker">Select Date:</label>
-							<input type="date" id="manualDatePicker" aria-labelledby="setDateButton">
-							<label for="manualTimePicker">Select Time:</label>
-							<input type="time" id="manualTimePicker" value="00:00" aria-labelledby="setDateButton">
-							<button id="setDateButton">Set Selected Date and Time</button>
-					</fieldset>
-					<fieldset>
-						<legend>Change the Theme</legend>
-						<select id="themeSelector">
-						    <option value="yotsuba">Yotsuba</option>
-						    <option value="yotsuba-b">Yotsuba B</option>
-						    <option value="futaba">Futaba</option>
-						    <option value="burichan">Burichan</option>
-						    <option value="tomorrow">Tomorrow</option>
-						    <option value="photon">Photon</option>
-						    <option value="accessible-warm">Accessible Warm</option>
-						    <option value="accessible-cold">Accessible Cold</option>
-						</select>
-					</fieldset>
+				<summary>Options/Controls</summary>
+				<fieldset>
+					<legend>Random Things</legend>
+					<button id="generateStringButton">Change ID</button>
+					<button id="changeColorButton">Change ID Color</button>
+					<button id="changeFlagButton">Change Flag</button>
+					<button id="randomDateButton" aria-label="Generate Random Date">Change Date</button>
+					<label for="zoomSelector">Set Zoom:</label>
+					<select id="zoomSelector">
+						<option value="100%">100%</option>
+						<option value="110%">110%</option>
+						<option value="125%">125%</option>
+						<option value="150%">150%</option>
+						<option value="175%">175%</option>
+						<option value="180%">180%</option>
+						<option value="200%">200%</option>
+					</select>
+				</fieldset>
+				<fieldset>
+					<legend>Set Specific Date and Time</legend>
+					<label for="manualDatePicker">Select Date:</label>
+					<input type="date" id="manualDatePicker" aria-labelledby="setDateButton">
+					<label for="manualTimePicker">Select Time:</label>
+					<input type="time" id="manualTimePicker" value="00:00" aria-labelledby="setDateButton">
+					<button id="setDateButton">Set Selected Date and Time</button>
+				</fieldset>
+				<fieldset>
+					<legend>Change the Theme</legend>
+					<select id="themeSelector">
+						<option value="yotsuba">Yotsuba</option>
+						<option value="yotsuba-b">Yotsuba B</option>
+						<option value="futaba">Futaba</option>
+						<option value="burichan">Burichan</option>
+						<option value="tomorrow">Tomorrow</option>
+						<option value="photon">Photon</option>
+						<option value="accessible-warm">Accessible Warm</option>
+						<option value="accessible-cold">Accessible Cold</option>
+					</select>
+				</fieldset>
+				<fieldset>
+					<legend>Save/Clear Settings</legend>
+					<button id="saveSettingsButton">Save Settings</button>
+					<button id="clearSettingsButton">Clear Settings</button>
+				</fieldset>
 			</details>
 		</section>
 	</main>
 	<footer>
 		<p>All trademarks and copyrights on this page are owned by their respective parties. Images uploaded are the responsibility of the Poster. Comments are owned by the Poster.</p>
-		<p id="footer-links"><a href="javascript:void();" class="open-modal">About</a><!-- • <a href="//www.4chan.org/feedback" target="_blank">Feedback</a> • <a href="//www.4chan.org/legal" target="_blank">Legal</a> • <a href="//www.4chan.org/contact" target="_blank">Contact</a> --></p>
+		<p id="footer-links"><a href="javascript:void();" class="open-modal">About</a><!-- • <a href="//www.4chan.org/feedback" target="_blank">Feedback</a> • <a href="//www.4chan.org/legal" target="_blank">Legal</a> • <a href="//www.4chan.org/contact" target="_blank">Contact</a> -->
+		</p>
 	</footer>
 	<dialog id="modal">
 		<h2>About</h2>
-		<p>i wanted a quick and dirty way to type my own greentext for some luls so i googled "greentext template" and found ai greentext generators, images, stupid reddit threads, quora explaining greentext, just garbage!  so i made this. initial buildout took maybe 3 hours (i suck with js) and then more tweaks done more lazily over time.</p>
+		<p>i wanted a quick and dirty way to type my own greentext for some luls so i googled "greentext template" and found ai greentext generators, images, stupid reddit threads, quora explaining greentext, just garbage! so i made this. initial buildout took maybe 3 hours (i suck with js) and then more tweaks done more lazily over time.</p>
 		<button class="close-modal">close</button>
 	</dialog>
 
 	<script>
-		// random ID string gen
+		// save settings setup
+		const settingsState = {
+				settingID: null,
+				settingIDColor: null,
+				settingFlag: null,
+				settingDate: null,
+				settingTheme: null,
+				settingZoom: null,
+		};
+		// save & clear settings
+		function saveSettingsToLocalStorage() {
+				localStorage.setItem("greentextSettings", JSON.stringify(settingsState));
+				alert("Settings saved!");
+		}
+		function clearLocalStorage() {
+				localStorage.removeItem("greentextSettings");
+				alert("Settings cleared!");
+		}
+		document.getElementById("saveSettingsButton").addEventListener("click", saveSettingsToLocalStorage);
+		document.getElementById("clearSettingsButton").addEventListener("click", clearLocalStorage);
+		// load settings
+		function loadSettingsFromLocalStorage() {
+				const savedSettings = localStorage.getItem("greentextSettings");
+				if (savedSettings) {
+						const parsedSettings = JSON.parse(savedSettings);
+
+						// Apply settings if they exist
+						if (parsedSettings.settingID) {
+								changeID(parsedSettings.settingID);
+						}
+						if (parsedSettings.settingIDColor) {
+								const { currentIndex: savedIndex, useDarkColors: savedUseDarkColors } = parsedSettings.settingIDColor;
+								currentIndex = savedIndex; // Restore the index
+								useDarkColors = savedUseDarkColors; // Restore the color set
+
+								const colors = useDarkColors ? darkBgColors : lightBgColors;
+								const spanElement = document.querySelector("span#randomStringSpan");
+								spanElement.style.backgroundColor = colors[currentIndex - 1];
+								spanElement.style.color = useDarkColors ? "white" : "black";
+						}
+						if (parsedSettings.settingFlag) {
+								changeFlag(parsedSettings.settingFlag);
+						}
+						if (parsedSettings.settingDate) {
+								changeDate(parsedSettings.settingDate);
+						}
+						if (parsedSettings.settingTheme) {
+								changeTheme(parsedSettings.settingTheme);
+						}
+						if (parsedSettings.settingZoom) {
+								changeZoom(parsedSettings.settingZoom);
+						}
+						// define function for retrieval of settings
+						function changeID(newID) {
+								document.getElementById("randomStringSpan").textContent = newID;
+								settingsState.settingID = newID;
+						}
+
+						function changeIDColor(color) {
+								document.getElementById("randomStringSpan").style.color = newColor;
+								settingsState.settingIDColor = newColor;
+						}
+
+						function changeFlag(flagValue) {
+								document.querySelector(".flag").style.backgroundPosition = flagValue;
+								settingsState.settingFlag = flagValue;
+						}
+
+						function changeDate(date) {
+								document.querySelector(".dateTime").textContent = date;
+								settingsState.settingDate = date;
+						}
+
+						function changeTheme(themeClass) {
+								document.body.className = themeClass;
+								settingsState.settingTheme = themeClass;
+						}
+
+						function changeZoom(zoomLevel) {
+								document.body.style.zoom = zoomLevel; // or transform: scale(zoomLevel);
+								settingsState.settingZoom = zoomLevel;
+						}
+
+				}
+		}
+		// Load settings on page load
+		document.addEventListener("DOMContentLoaded", () => {
+				loadSettingsFromLocalStorage();
+		});
+		// Random ID string generator
 		function generateRandomString(length) {
 				const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-=_";
 				let result = "";
@@ -469,19 +564,20 @@
 						const randomIndex = Math.floor(Math.random() * chars.length);
 						result += chars[randomIndex];
 				}
-				return result;
+				return result; // Return the generated string
 		}
 		document.getElementById("generateStringButton").addEventListener("click", function () {
-				const randomString = generateRandomString(8);
-				document.getElementById("randomStringSpan").textContent = randomString;
+				const randomString = generateRandomString(8); // Generate the random string
+				document.getElementById("randomStringSpan").textContent = randomString; // Display the string
+				settingsState.settingID = randomString; // Save the string in the settingsState
 		});
+
 
 		// change ID bgc
 		const darkBgColors = ["blue", "green", "purple", "teal"]; // Colors needing white text
 		const lightBgColors = ["yellow", "orange", "pink", "lightgray"]; // Colors needing black text
 		let currentIndex = 0; // Tracks the current color index
 		let useDarkColors = true; // Toggles between color sets
-
 		document.getElementById("changeColorButton").addEventListener("click", function () {
 				const spanElement = document.querySelector("span#randomStringSpan");
 
@@ -499,11 +595,12 @@
 				if (currentIndex === 0) {
 						useDarkColors = !useDarkColors;
 				}
+				settingsState.settingIDColor = {currentIndex, useDarkColors}; // Save the setting in the state object
 		});
+
 		// change flag
 		document.getElementById("changeFlagButton").addEventListener("click", function () {
 				const spanFlag = document.querySelector("span.flag");
-
 				// Define sprite sheet configurations
 				const spriteSheets = [
 						{
@@ -519,35 +616,30 @@
 								flagHeight: 11         // Height of each flag in this sprite
 						}
 				];
-
 				// Randomly select a sprite sheet
 				const sprite = spriteSheets[Math.floor(Math.random() * spriteSheets.length)];
-
 				// Calculate total number of flags in the selected sprite
 				const totalFlags = sprite.columns * sprite.rows;
-
 				// Randomly select a flag from the selected sprite
 				const flagIndex = Math.floor(Math.random() * totalFlags);
 				const col = flagIndex % sprite.columns; // Column (x position)
 				const row = Math.floor(flagIndex / sprite.columns); // Row (y position)
-
 				// Set the flag's background image and position
 				spanFlag.style.backgroundImage = `url('${sprite.url}')`;
 				spanFlag.style.backgroundPositionX = `-${col * 16}px`; // Move x by flag width
 				spanFlag.style.backgroundPositionY = `-${row * sprite.flagHeight}px`; // Adjust y by flag height
 				spanFlag.style.backgroundSize = `${sprite.columns * 16}px ${sprite.rows * sprite.flagHeight}px`; // Ensure scaling matches flag sizes
+				settingsState.settingFlag = flagIndex; // Save the setting in the state object
 		});
 
 		// set and change the date
 		document.addEventListener("DOMContentLoaded", function () {
 				const dateTimeSpan = document.querySelector(".dateTime");
-
 				// Display the current date and time when the page loads
 				function updateCurrentDateTime() {
 						const now = new Date();
 						dateTimeSpan.textContent = formatDate(now);
 				}
-
 				// Format a date into "MM/DD/YY(Day)HH:mm:ss"
 				function formatDate(date) {
 						const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -558,10 +650,8 @@
 						const minutes = String(date.getMinutes()).padStart(2, "0");
 						const seconds = String(date.getSeconds()).padStart(2, "0");
 						const dayName = days[date.getDay()];
-
 						return `${month}/${day}/${year}(${dayName})${hours}:${minutes}:${seconds}`;
 				}
-
 				// Generate a random date between Oct 1, 2003, and today
 				function getRandomDate() {
 						const start = new Date("2003-10-01").getTime(); // Oct 1, 2023
@@ -569,22 +659,18 @@
 						const randomTime = Math.floor(Math.random() * (end - start + 1)) + start;
 						return new Date(randomTime);
 				}
-
 				// Set date and time from the date and time pickers
 				function setManualDate() {
 						const dateInput = document.getElementById("manualDatePicker").value; // Get selected date
 						const timeInput = document.getElementById("manualTimePicker").value; // Get selected time
-
 						if (dateInput) {
 								// Create a new Date object from the selected date
 								const selectedDate = new Date(dateInput);
-
 								// If a time is provided, update the hours and minutes
 								if (timeInput) {
 										const [hours, minutes] = timeInput.split(":").map(Number); // Split the time string into hours and minutes
 										selectedDate.setHours(hours, minutes, 0); // Set hours, minutes, and seconds to the selected time
 								}
-
 								// Update the span with the formatted date and time
 								const dateTimeSpan = document.querySelector(".dateTime");
 								dateTimeSpan.textContent = formatDate(selectedDate);
@@ -592,20 +678,16 @@
 								alert("Please select a date!");
 						}
 				}
-
-
 				// Attach event listeners
 				document.getElementById("randomDateButton").addEventListener("click", function () {
 						const randomDate = getRandomDate();
 						dateTimeSpan.textContent = formatDate(randomDate);
 				});
-
 				document.getElementById("setDateButton").addEventListener("click", setManualDate);
-
 				// Initialize the current date and time
 				updateCurrentDateTime();
+				settingsState.settingDate = Date; // Save the setting in the state object
 		});
-
 
 		// autosize the textarea
 		document.addEventListener("input", function (event) {
@@ -620,15 +702,12 @@
 				if (event.key === "Enter") {
 						// Prevent the default new line behavior
 						event.preventDefault();
-
 						// Get the current caret position
 						const cursorPosition = this.selectionStart;
-
 						// Insert a new line followed by ">"
 						const textBeforeCursor = this.value.substring(0, cursorPosition);
 						const textAfterCursor = this.value.substring(cursorPosition);
 						this.value = textBeforeCursor + "\n>" + textAfterCursor;
-
 						// Move the caret to the correct position after the new ">" symbol
 						this.selectionStart = this.selectionEnd = cursorPosition + 3; // 3 accounts for `\n> `
 				}
@@ -641,7 +720,8 @@
 		body.className = "yotsuba";
 		// Event listener to change the class on the body when the selection changes
 		themeSelector.addEventListener("change", () => {
-		    body.className = themeSelector.value;
+				body.className = themeSelector.value;
+				settingsState.settingTheme = Theme; // Save the setting in the state object
 		});
 
 		// Reference to the dropdown and the zoom element
@@ -651,21 +731,26 @@
 		e.style.zoom = "100%";
 		// Event listener to change the style on the zoom e when the selection changes
 		zoomSelector.addEventListener("change", () => {
-		    e.style.zoom = zoomSelector.value;
+				e.style.zoom = zoomSelector.value;
+				settingsState.settingZoom = Zoom; // Save the setting in the state object
 		});
+
+
+
+
+
 
 		// dialog modal
 		const modal = document.querySelector("#modal");
 		const openModal = document.querySelector(".open-modal");
 		const closeModal = document.querySelector(".close-modal");
-
 		openModal.addEventListener("click", () => {
-		  modal.showModal();
+			modal.showModal();
 		});
-
 		closeModal.addEventListener("click", () => {
-		  modal.close();
+			modal.close();
 		});
 	</script>
 </body>
+
 </html>
