@@ -467,7 +467,7 @@
 	</dialog>
 
 	<script>
-		// save settings setup
+		// Save settings setup
 		const settingsState = {
 				settingID: null,
 				settingIDColor: null,
@@ -476,18 +476,59 @@
 				settingTheme: null,
 				settingZoom: null,
 		};
-		// save & clear settings
+
+		// Save & clear settings
 		function saveSettingsToLocalStorage() {
 				localStorage.setItem("greentextSettings", JSON.stringify(settingsState));
 				alert("Settings saved!");
 		}
+
 		function clearLocalStorage() {
+				// Remove saved settings from localStorage
 				localStorage.removeItem("greentextSettings");
 				alert("Settings cleared!");
+
+				// Reset settingsState
+				settingsState.settingID = null;
+				settingsState.settingIDColor = null;
+				settingsState.settingFlag = null;
+				settingsState.settingDate = null;
+				settingsState.settingTheme = null;
+				settingsState.settingZoom = null;
+
+				// Reset all page elements to their defaults
+
+				// Reset ID span
+				document.getElementById("randomStringSpan").textContent = "8008135!";
+
+				// Reset ID color
+				const spanElement = document.querySelector("span#randomStringSpan");
+				spanElement.style.backgroundColor = "rgb(49, 168, 232)"; // Reset to default background color
+				spanElement.style.color = "black"; // Reset to default text color
+
+				// Reset flag
+				document.querySelector(".flag").style.backgroundPosition = "";
+
+				// Reset date and time
+				const dateTimeSpan = document.querySelector(".dateTime");
+				dateTimeSpan.textContent = "07/04/1776 choose a date/time or reload page"; // Clear displayed date and time
+				document.getElementById("manualDatePicker").value = ""; // Clear date picker
+				document.getElementById("manualTimePicker").value = "00:00"; // Reset time picker to 00:00
+
+				// Reset theme
+				document.body.className = "yotsuba"; // Reset body class
+				document.getElementById("themeSelector").value = "yotsuba"; // Set theme dropdown to default
+
+				// Reset zoom
+				document.querySelector("#zoomer").style.zoom = ""; // Reset zoom level
+				document.getElementById("zoomSelector").value = "100%"; // Set zoom dropdown to default
 		}
+
+
 		document.getElementById("saveSettingsButton").addEventListener("click", saveSettingsToLocalStorage);
 		document.getElementById("clearSettingsButton").addEventListener("click", clearLocalStorage);
-		// load settings
+
+		// Load settings
 		function loadSettingsFromLocalStorage() {
 				const savedSettings = localStorage.getItem("greentextSettings");
 				if (savedSettings) {
@@ -507,55 +548,276 @@
 								spanElement.style.backgroundColor = colors[currentIndex - 1];
 								spanElement.style.color = useDarkColors ? "white" : "black";
 						}
-						if (parsedSettings.settingFlag) {
-								changeFlag(parsedSettings.settingFlag);
+						if (parsedSettings.settingFlag !== null) {
+								restoreFlag(parsedSettings.settingFlag);
 						}
 						if (parsedSettings.settingDate) {
 								changeDate(parsedSettings.settingDate);
+
+								// Pre-fill the date and time inputs
+								const datePicker = document.getElementById("manualDatePicker");
+								const timePicker = document.getElementById("manualTimePicker");
+								const savedDate = new Date(parsedSettings.settingDate); // Convert to Date object
+
+								// Format and set date
+								datePicker.value = savedDate.toISOString().split("T")[0];
+
+								// Format and set time
+								timePicker.value = savedDate.toTimeString().split(" ")[0].slice(0, 5);
 						}
 						if (parsedSettings.settingTheme) {
 								changeTheme(parsedSettings.settingTheme);
+
+								// Set dropdown to match the loaded theme
+								const themeSelector = document.getElementById("themeSelector");
+								themeSelector.value = parsedSettings.settingTheme;
 						}
 						if (parsedSettings.settingZoom) {
 								changeZoom(parsedSettings.settingZoom);
-						}
-						// define function for retrieval of settings
-						function changeID(newID) {
-								document.getElementById("randomStringSpan").textContent = newID;
-								settingsState.settingID = newID;
-						}
 
-						function changeIDColor(color) {
-								document.getElementById("randomStringSpan").style.color = newColor;
-								settingsState.settingIDColor = newColor;
+								// Set zoom dropdown to match the loaded zoom level
+								const zoomSelector = document.getElementById("zoomSelector");
+								zoomSelector.value = parsedSettings.settingZoom;
 						}
-
-						function changeFlag(flagValue) {
-								document.querySelector(".flag").style.backgroundPosition = flagValue;
-								settingsState.settingFlag = flagValue;
-						}
-
-						function changeDate(date) {
-								document.querySelector(".dateTime").textContent = date;
-								settingsState.settingDate = date;
-						}
-
-						function changeTheme(themeClass) {
-								document.body.className = themeClass;
-								settingsState.settingTheme = themeClass;
-						}
-
-						function changeZoom(zoomLevel) {
-								document.body.style.zoom = zoomLevel; // or transform: scale(zoomLevel);
-								settingsState.settingZoom = zoomLevel;
-						}
-
 				}
 		}
+
+		// Define functions for applying settings
+		function changeID(newID) {
+				document.getElementById("randomStringSpan").textContent = newID;
+				settingsState.settingID = newID;
+		}
+
+		function changeFlag(flagValue) {
+				document.querySelector(".flag").style.backgroundPosition = flagValue;
+				settingsState.settingFlag = flagValue;
+		}
+
+		function changeDate(date) {
+				document.querySelector(".dateTime").textContent = date;
+				settingsState.settingDate = date; // Save to the state
+		}
+
+		function changeTheme(themeClass) {
+				document.body.className = themeClass;
+				settingsState.settingTheme = themeClass;
+		}
+
+		function changeZoom(zoomLevel) {
+				document.querySelector("#zoomer").style.zoom = zoomLevel; // or transform: scale(zoomLevel);
+				settingsState.settingZoom = zoomLevel;
+		}
+
 		// Load settings on page load
 		document.addEventListener("DOMContentLoaded", () => {
 				loadSettingsFromLocalStorage();
 		});
+
+		// Set and change the date
+		document.addEventListener("DOMContentLoaded", function () {
+				const dateTimeSpan = document.querySelector(".dateTime");
+
+				// Format a date into "MM/DD/YY(Day)HH:mm:ss"
+				function formatDate(date) {
+						const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+						const month = String(date.getMonth() + 1).padStart(2, "0");
+						const day = String(date.getDate()).padStart(2, "0");
+						const year = String(date.getFullYear()).slice(-2);
+						const hours = String(date.getHours()).padStart(2, "0");
+						const minutes = String(date.getMinutes()).padStart(2, "0");
+						const seconds = String(date.getSeconds()).padStart(2, "0");
+						const dayName = days[date.getDay()];
+						return `${month}/${day}/${year}(${dayName})${hours}:${minutes}:${seconds}`;
+				}
+
+				// Generate a random date between Oct 1, 2003, and today
+				function getRandomDate() {
+						const start = new Date("2003-10-01").getTime();
+						const end = new Date().getTime();
+						const randomTime = Math.floor(Math.random() * (end - start + 1)) + start;
+						return new Date(randomTime);
+				}
+
+				// Set date and time from the date and time pickers
+				function setManualDate() {
+						const dateInput = document.getElementById("manualDatePicker").value; // Get selected date
+						const timeInput = document.getElementById("manualTimePicker").value; // Get selected time
+						if (dateInput) {
+								const selectedDate = new Date(dateInput);
+								if (timeInput) {
+										const [hours, minutes] = timeInput.split(":").map(Number);
+										selectedDate.setHours(hours, minutes, 0);
+								}
+								const formattedDate = formatDate(selectedDate);
+								dateTimeSpan.textContent = formattedDate;
+								settingsState.settingDate = formattedDate; // Save the setting
+						} else {
+								alert("Please select a date!");
+						}
+				}
+
+				// Attach event listeners
+				document.getElementById("randomDateButton").addEventListener("click", function () {
+						const randomDate = getRandomDate();
+						const formattedDate = formatDate(randomDate);
+						dateTimeSpan.textContent = formattedDate;
+						settingsState.settingDate = formattedDate; // Save the setting
+				});
+
+				document.getElementById("setDateButton").addEventListener("click", setManualDate);
+
+				// Initialize the date span with the last saved date if available
+				if (settingsState.settingDate) {
+						dateTimeSpan.textContent = settingsState.settingDate;
+				} else {
+						// Or display the current date and time when the page loads
+						const now = new Date();
+						const formattedNow = formatDate(now);
+						dateTimeSpan.textContent = formattedNow;
+						settingsState.settingDate = formattedNow; // Save the current date
+				}
+		});
+		// Event listener for the "Set Date" button makes the it show the correct values if they were retrieved from localstorage
+		document.getElementById("setDateButton").addEventListener("click", function () {
+				const dateInput = document.getElementById("manualDatePicker").value; // Get selected date
+				const timeInput = document.getElementById("manualTimePicker").value; // Get selected time
+
+				if (dateInput) {
+						const selectedDate = new Date(dateInput); // Create a Date object from the selected date
+
+						if (timeInput) {
+								const [hours, minutes] = timeInput.split(":").map(Number); // Parse the time
+								selectedDate.setHours(hours, minutes, 0); // Set hours and minutes
+						}
+
+						changeDate(selectedDate.toISOString()); // Update the UI
+						settingsState.settingDate = selectedDate.toISOString(); // Save ISO date to settingsState
+						saveSettingsToLocalStorage(); // Save to localStorage
+				} else {
+						alert("Please select a date!");
+				}
+		});
+
+
+		// Restore flag from saved setting
+		function restoreFlag(flagIndex) {
+				const spanFlag = document.querySelector("span.flag");
+
+				// Define sprite sheet configurations
+				const spriteSheets = [
+						{
+								url: "flags.png",       // Sprite 1
+								columns: 5,            // Number of flags per row (80px wide / 16px per flag)
+								rows: 5,               // Number of rows (60px tall / 12px per flag)
+								flagHeight: 12         // Height of each flag in this sprite
+						},
+						{
+								url: "flags.8.png",    // Sprite 2
+								columns: 16,           // Number of flags per row (256px wide / 16px per flag)
+								rows: 17,              // Number of rows (187px tall / 11px per flag)
+								flagHeight: 11         // Height of each flag in this sprite
+						}
+				];
+
+				// Determine which sprite sheet was used based on the flagIndex
+				let cumulativeFlags = 0;
+				let selectedSprite;
+				for (const sprite of spriteSheets) {
+						const totalFlagsInSprite = sprite.columns * sprite.rows;
+						if (flagIndex < cumulativeFlags + totalFlagsInSprite) {
+								selectedSprite = sprite;
+								flagIndex -= cumulativeFlags;
+								break;
+						}
+						cumulativeFlags += totalFlagsInSprite;
+				}
+
+				if (!selectedSprite) {
+						console.error("Invalid flag index");
+						return;
+				}
+
+				const col = flagIndex % selectedSprite.columns; // Column (x position)
+				const row = Math.floor(flagIndex / selectedSprite.columns); // Row (y position)
+				// Set the flag's background image and position
+				spanFlag.style.backgroundImage = `url('${selectedSprite.url}')`;
+				spanFlag.style.backgroundPositionX = `-${col * 16}px`; // Move x by flag width
+				spanFlag.style.backgroundPositionY = `-${row * selectedSprite.flagHeight}px`; // Adjust y by flag height
+				spanFlag.style.backgroundSize = `${selectedSprite.columns * 16}px ${selectedSprite.rows * selectedSprite.flagHeight}px`; // Ensure scaling matches flag sizes
+
+				settingsState.settingFlag = flagIndex; // Update settings state
+		}
+
+		// Change flag
+		document.getElementById("changeFlagButton").addEventListener("click", function () {
+				const spanFlag = document.querySelector("span.flag");
+				// Define sprite sheet configurations
+				const spriteSheets = [
+						{
+								url: "flags.png",       // Sprite 1
+								columns: 5,            // Number of flags per row (80px wide / 16px per flag)
+								rows: 5,               // Number of rows (60px tall / 12px per flag)
+								flagHeight: 12         // Height of each flag in this sprite
+						},
+						{
+								url: "flags.8.png",    // Sprite 2
+								columns: 16,           // Number of flags per row (256px wide / 16px per flag)
+								rows: 17,              // Number of rows (187px tall / 11px per flag)
+								flagHeight: 11         // Height of each flag in this sprite
+						}
+				];
+				// Randomly select a sprite sheet
+				const sprite = spriteSheets[Math.floor(Math.random() * spriteSheets.length)];
+				// Calculate total number of flags in the selected sprite
+				const totalFlags = sprite.columns * sprite.rows;
+				// Randomly select a flag from the selected sprite
+				const flagIndex = Math.floor(Math.random() * totalFlags);
+				const col = flagIndex % sprite.columns; // Column (x position)
+				const row = Math.floor(flagIndex / sprite.columns); // Row (y position)
+				// Set the flag's background image and position
+				spanFlag.style.backgroundImage = `url('${sprite.url}')`;
+				spanFlag.style.backgroundPositionX = `-${col * 16}px`; // Move x by flag width
+				spanFlag.style.backgroundPositionY = `-${row * sprite.flagHeight}px`; // Adjust y by flag height
+				spanFlag.style.backgroundSize = `${sprite.columns * 16}px ${sprite.rows * sprite.flagHeight}px`; // Ensure scaling matches flag sizes
+				settingsState.settingFlag = flagIndex; // Save the setting in the state object
+		});
+
+		// Theme changer
+		const themeSelector = document.getElementById("themeSelector");
+		const body = document.body;
+		// Default class for the body
+		body.className = "yotsuba";
+		// Event listener to change the class on the body when the selection changes
+		themeSelector.addEventListener("change", () => {
+				const selectedTheme = themeSelector.value;
+				body.className = selectedTheme;
+				settingsState.settingTheme = selectedTheme; // Save the setting in the state object
+		});
+		// Event listener for theme selector makes the dropdown show the correct theme if it was retrieved from localstorage
+		document.getElementById("themeSelector").addEventListener("change", function () {
+				const selectedTheme = this.value; // Get the selected theme
+				changeTheme(selectedTheme); // Apply the theme
+				settingsState.settingTheme = selectedTheme; // Save the theme to the state
+		});
+
+		// Zoom changer
+		const zoomSelector = document.getElementById("zoomSelector");
+		const zoomElement = document.getElementById("zoomer");
+		// Default zoom level
+		zoomElement.style.zoom = "100%";
+		// Event listener to change the zoom level
+		zoomSelector.addEventListener("change", () => {
+				const selectedZoom = zoomSelector.value;
+				zoomElement.style.zoom = selectedZoom;
+				settingsState.settingZoom = selectedZoom; // Save the setting in the state object
+		});
+		// Event listener for zoom selector makes the dropdown show the correct zoom if it was retrieved from localstorage
+		document.getElementById("zoomSelector").addEventListener("change", function () {
+				const selectedZoom = this.value; // Get the selected zoom level
+				changeZoom(selectedZoom); // Apply the zoom
+				settingsState.settingZoom = selectedZoom; // Save the zoom level to the state
+		});
+
 		// Random ID string generator
 		function generateRandomString(length) {
 				const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-=_";
@@ -632,62 +894,7 @@
 				settingsState.settingFlag = flagIndex; // Save the setting in the state object
 		});
 
-		// set and change the date
-		document.addEventListener("DOMContentLoaded", function () {
-				const dateTimeSpan = document.querySelector(".dateTime");
-				// Display the current date and time when the page loads
-				function updateCurrentDateTime() {
-						const now = new Date();
-						dateTimeSpan.textContent = formatDate(now);
-				}
-				// Format a date into "MM/DD/YY(Day)HH:mm:ss"
-				function formatDate(date) {
-						const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-						const month = String(date.getMonth() + 1).padStart(2, "0");
-						const day = String(date.getDate()).padStart(2, "0");
-						const year = String(date.getFullYear()).slice(-2);
-						const hours = String(date.getHours()).padStart(2, "0");
-						const minutes = String(date.getMinutes()).padStart(2, "0");
-						const seconds = String(date.getSeconds()).padStart(2, "0");
-						const dayName = days[date.getDay()];
-						return `${month}/${day}/${year}(${dayName})${hours}:${minutes}:${seconds}`;
-				}
-				// Generate a random date between Oct 1, 2003, and today
-				function getRandomDate() {
-						const start = new Date("2003-10-01").getTime(); // Oct 1, 2023
-						const end = new Date().getTime(); // Today's date
-						const randomTime = Math.floor(Math.random() * (end - start + 1)) + start;
-						return new Date(randomTime);
-				}
-				// Set date and time from the date and time pickers
-				function setManualDate() {
-						const dateInput = document.getElementById("manualDatePicker").value; // Get selected date
-						const timeInput = document.getElementById("manualTimePicker").value; // Get selected time
-						if (dateInput) {
-								// Create a new Date object from the selected date
-								const selectedDate = new Date(dateInput);
-								// If a time is provided, update the hours and minutes
-								if (timeInput) {
-										const [hours, minutes] = timeInput.split(":").map(Number); // Split the time string into hours and minutes
-										selectedDate.setHours(hours, minutes, 0); // Set hours, minutes, and seconds to the selected time
-								}
-								// Update the span with the formatted date and time
-								const dateTimeSpan = document.querySelector(".dateTime");
-								dateTimeSpan.textContent = formatDate(selectedDate);
-						} else {
-								alert("Please select a date!");
-						}
-				}
-				// Attach event listeners
-				document.getElementById("randomDateButton").addEventListener("click", function () {
-						const randomDate = getRandomDate();
-						dateTimeSpan.textContent = formatDate(randomDate);
-				});
-				document.getElementById("setDateButton").addEventListener("click", setManualDate);
-				// Initialize the current date and time
-				updateCurrentDateTime();
-				settingsState.settingDate = Date; // Save the setting in the state object
-		});
+
 
 		// autosize the textarea
 		document.addEventListener("input", function (event) {
@@ -713,27 +920,7 @@
 				}
 		});
 
-		// Reference to the dropdown and the body element
-		const themeSelector = document.getElementById("themeSelector");
-		const body = document.body;
-		// Default class for the body
-		body.className = "yotsuba";
-		// Event listener to change the class on the body when the selection changes
-		themeSelector.addEventListener("change", () => {
-				body.className = themeSelector.value;
-				settingsState.settingTheme = Theme; // Save the setting in the state object
-		});
 
-		// Reference to the dropdown and the zoom element
-		const zoomSelector = document.getElementById("zoomSelector");
-		const e = document.getElementById("zoomer");
-		// Default class for the zoom e
-		e.style.zoom = "100%";
-		// Event listener to change the style on the zoom e when the selection changes
-		zoomSelector.addEventListener("change", () => {
-				e.style.zoom = zoomSelector.value;
-				settingsState.settingZoom = Zoom; // Save the setting in the state object
-		});
 
 
 
