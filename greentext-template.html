@@ -8,8 +8,51 @@
 		:root{
 			/* allow animate to height:auto */
 			interpolate-size: allow-keywords;
-			--bgc1: #F0E0D6;
-			--bgc2: #FFFFEE;
+			--yot-bgc1: #F0E0D6;
+			--yot-bgc2: #FFE;
+			--yot-bd1: #D9BFB7;
+			--yot-tc: #800000;
+			--yot-nc: #117743;
+
+			--yotb-bgc1: #D6DAF0;
+			--yotb-bgc2: #EEF2FF;
+			--yotb-bd1: #B7C5D9;
+			--yotb-tc: #000;
+			--yotb-nc: #117743;
+
+			--fut-bgc1: #F0E0D6;
+			--fut-bgc2: #FFE;
+			--fut-bd1: #D9BFB7;
+			--fut-tc: #800000;
+			--fut-nc: #117743;
+
+			--bur-bgc1: #D6DAF0;
+			--bur-bgc2: #EEF2FF;
+			--bur-bd1: #B7C5D9;
+			--bur-tc: #000;
+			--bur-nc: #117743;
+
+			--tom-bgc1: #282A2E;
+			--tom-bgc2: #1D1F21;
+			--tom-bd1: #282a2e;
+			--tom-tc: #c5c8c6;
+			--tom-nc: #c5c8c6;
+
+			--pho-bgc1: #DDD;
+			--pho-bgc2: #EEE;
+			--pho-bd1: #CCC;
+			--pho-tc: #333;
+			--pho-nc: #004A99;
+
+			--gt1: #789922;
+			--gt2: #b5bd68;
+
+			--ff1: arial, helvetica, sans-serif;
+			--fs1: 10pt;
+
+			--ff2: 'Times New Roman', serif;
+			--fs2: 12pt;
+
 		}
 		body {
 			display: flex;
@@ -20,34 +63,167 @@
 			box-sizing: border-box;
 			padding: 0;
 			margin: 0;
-			font-family: arial, helvetica, sans-serif;
-			font-size: 10pt;
-			background: var(--bgc2);
-			color: #800000;
+			font-family: var(--ff1);
+			font-size: var(--fs1);
+			background: var(--yot-bgc2);
+			color: var(--yot-tc);
+		}
+		.yotsuba{
+			background: var(--yot-bgc2);
+			color: var(--yot-tc);
+			& .post{
+				background: var(--yot-bgc1);
+				border-color: var(--yot-bd1);
+			}
+			& .name{
+				color:var(--yot-nc);
+			}
+			& textarea{
+				font-family: var(--ff1);
+				font-size: var(--fs1);
+			}
+			& fieldset{
+				border-color: var(--yot-bd1);
+			}
+			& footer{
+				border-top: 1px solid var(--yot-bd1);
+			}
+		}
+		.yotsuba-b{
+			background: var(--yotb-bgc2);
+			color: var(--yotb-tc);
+			& .post{
+				background: var(--yotb-bgc1);
+				border-color: var(--yotb-bd1);
+			}
+			& .name{
+				color:var(--yotb-nc);
+			}
+			& textarea{
+				font-family: var(--ff1);
+				font-size: var(--fs1);
+			}
+			& fieldset{
+				border-color: var(--yotb-bd1);
+			}
+			& footer{
+				border-top: 1px solid var(--yotb-bd1);
+			}
+		}
+		.futaba{
+			background: var(--fut-bgc2);
+			color: var(--fut-tc);
+			font-size: var(--fs2);
+			font-family: var(--ff2);
+			& .post{
+				background: var(--fut-bgc1);
+				border-color: var(--fut-bd1);
+			}
+			& .name{
+				color:var(--fut-nc);
+			}
+			& textarea{
+				font-family: var(--ff2);
+				font-size: var(--fs2);
+			}
+			& fieldset{
+				border-color: var(--fut-bd1);
+			}
+			& footer{
+				border-top: 1px solid var(--fut-bd1);
+			}
+		}
+		.burichan{
+			background: var(--bur-bgc2);
+			color: var(--bur-tc);
+			font-size: var(--fs2);
+			font-family: var(--ff2);
+			& .post{
+				background: var(--bur-bgc1);
+				border-color: var(--bur-bd1);
+			}
+			& .name{
+				color:var(--bur-nc);
+			}
+			& textarea{
+				font-family: var(--ff2);
+				font-size: var(--fs2);
+			}
+			& fieldset{
+				border-color: var(--bur-bd1);
+			}
+			& footer{
+				border-top: 1px solid var(--bur-bd1);
+			}
+		}
+		.tomorrow{
+			background: var(--tom-bgc2);
+			color: var(--tom-tc);
+			& .post{
+				background: var(--tom-bgc1);
+				border-color: var(--tom-bd1);
+			}
+			& .name{
+				color:var(--tom-nc);
+			}
+			& textarea{
+				color: var(--gt2);
+				font-family: var(--ff1);
+				font-size: var(--fs1);
+			}
+			& fieldset{
+				border-color: var(--tom-bd1);
+			}
+			& footer{
+				border-top: 1px solid var(--tom-bd1);
+			}
+		}
+		.photon{
+			background: var(--pho-bgc2);
+			color: var(--pho-tc);
+			& .post{
+				background: var(--pho-bgc1);
+				border-color: var(--pho-bd1);
+			}
+			& .name{
+				color:var(--pho-nc);
+			}
+			& textarea{
+				font-family: var(--ff1);
+				font-size: var(--fs1);
+			}
+			& fieldset{
+				border-color: var(--pho-bd1);
+			}
+			& footer{
+				border-top: 1px solid var(--pho-bd1);
+			}
 		}
 		header{
 			margin:0 1rem 1rem 1rem;
 			place-self:normal;
 		}
-
-		section {}
-
-		div {
-			background: var(--bgc1);
+		main{
+			width:100%;
 		}
-		div:has(main){
+		section.first{
 			margin: 1rem;
+			width: fit-content;
+			place-self:center;
 		}
-
-		main {
+		section.second{
+			display:flex;
+			width:100%;
+		}
+		.post {
 			display: flex;
 			flex-direction: column;
-			border: 1px solid #D9BFB7;
+			border: 1px solid var(--yot-bd1);
 			border-left: none;
 			border-top: none;
 		}
 		span.name {
-			color: #117743;
+			color: var(--yot-nc);
 			font-weight: bold;
 		}
 		.posteruid .hand {
@@ -64,21 +240,20 @@
 			background: url('flags.png') no-repeat;
 			background-position: -32px -24px;
 		}
-
 		textarea {
 			box-sizing: border-box;
 			display: block;
-			padding: 10pt 40px;
+			padding: var(--fs1) 40px;
 			width: 90%;
 			height: auto;
 			min-height: fit-content;
 			border: none;
 			resize: none;
 			order: 2;
-			color: #789922;
-			background: var(--bgc1);
-			font-family: arial, helvetica, sans-serif;
-			font-size: 10pt;
+			color: var(--gt1);
+			background: transparent;
+			/*font-family: var(--ff1);
+			font-size: var(--fs1);*/
 		}
 		details{
 			cursor:pointer;
@@ -98,6 +273,13 @@
 		}
 		fieldset{
 			margin:1rem;
+			border-width: 1px;
+		}
+		footer {
+			margin-top: auto;
+			width:100%;
+			place-items:center;
+			font-size: 10px;
 		}
 
 		/* only color, background-color, cursor, outline, text-decoration, text-emphasis-color and text-shadow */
@@ -107,13 +289,10 @@
 
 			/*		background:linear-gradient(to bottom, hsla(10, 23%, 16%, 1), hsla(0, 100%, 1%, 1));*/
 		}
-
-
-
 	</style>
 </head>
 
-<body>
+<body class="yotsuba">
 	<header>
 		<h1>Greentext Template</h1>
 		<ol>
@@ -124,35 +303,49 @@
 			<li>PROFIT!</li>
 		</ol>
 	</header>
-
-	<section>
-		<div>
-
-			<main>
+	<main>
+		<section class="first">
+			<div class="post">
 				<div class="postInfo desktop"><input type="checkbox"> <span class="nameBlock"><span class="name">Anonymous</span> <span class="posteruid">(ID: <span id="randomStringSpan" class="hand" title="Highlight posts by this ID" style="background-color: rgb(49, 168, 232); color: black;">8008135!</span>)</span> <span title="Norway" class="flag flag-no"></span></span> <span class="dateTime" data-utc="1733854490">12/10/24(Tue)13:14:50</span> <span class="postNum desktop"></div>
-				<textarea name="woo" id="woo1" cols="80" rows="3" spellcheck="false">> be me &#13;> ask chatgpt how to add > to each new line &#13;> mfw it works</textarea>
-			</main>
-		</div>
-	</section>
-	<details class="controls">
-			<summary>Options/Controls</summary>
-			<fieldset>
-					<legend>Modify ID and Flag</legend>
-					<button id="generateStringButton">Change ID</button>
-					<button id="changeColorButton">Change ID Color</button>
-					<button id="changeFlagButton">Change Flag</button>
-			</fieldset>
+					<textarea name="woo" id="woo1" cols="80" rows="3" spellcheck="false">> be me &#13;> ask chatgpt how to add > to each new line &#13;> mfw it works</textarea>
+				</div>
+		</section>
+		<section class="second">
+			<details class="controls">
+					<summary>Options/Controls</summary>
+					<fieldset>
+							<legend>Random Choices</legend>
+							<button id="generateStringButton">Change ID</button>
+							<button id="changeColorButton">Change ID Color</button>
+							<button id="changeFlagButton">Change Flag</button>
+							<button id="randomDateButton" aria-label="Generate Random Date">Random Date</button>
+					</fieldset>
+					<fieldset>
+							<legend>Set Specific Date and Time</legend>
+							<label for="manualDatePicker">Select Date:</label>
+							<input type="date" id="manualDatePicker" aria-labelledby="setDateButton">
+							<label for="manualTimePicker">Select Time:</label>
+							<input type="time" id="manualTimePicker" value="00:00" aria-labelledby="setDateButton">
+							<button id="setDateButton">Set Selected Date and Time</button>
+					</fieldset>
+					<fieldset>
+						<legend>Change the Theme</legend>
+						<select id="themeSelector">
+						    <option value="yotsuba">Yotsuba</option>
+						    <option value="yotsuba-b">Yotsuba B</option>
+						    <option value="futaba">Futaba</option>
+						    <option value="burichan">Burichan</option>
+						    <option value="tomorrow">Tomorrow</option>
+						    <option value="photon">Photon</option>
+						</select>
+					</fieldset>
+			</details>
+		</section>
+	</main>
 
-			<fieldset>
-					<legend>Set or Generate Date and Time</legend>
-					<button id="randomDateButton" aria-label="Generate Random Date">Random Date</button>
-					<label for="manualDatePicker">Select Date:</label>
-					<input type="date" id="manualDatePicker" aria-labelledby="setDateButton">
-					<label for="manualTimePicker">Select Time:</label>
-					<input type="time" id="manualTimePicker" value="00:00" aria-labelledby="setDateButton">
-					<button id="setDateButton">Set Selected Date and Time</button>
-			</fieldset>
-	</details>
+	<footer>
+		<p>All trademarks and copyrights on this page are owned by their respective parties. Images uploaded are the responsibility of the Poster. Comments are owned by the Poster.</p>
+	</footer>
 
 	<script>
 		// random ID string gen
@@ -326,6 +519,18 @@
 						// Move the caret to the correct position after the new ">" symbol
 						this.selectionStart = this.selectionEnd = cursorPosition + 3; // 3 accounts for `\n> `
 				}
+		});
+
+		// Reference to the dropdown and the body element
+		const themeSelector = document.getElementById("themeSelector");
+		const body = document.body;
+
+		// Default class for the body
+		body.className = "yotsuba";
+
+		// Event listener to change the class on the body when the selection changes
+		themeSelector.addEventListener("change", () => {
+		    body.className = themeSelector.value;
 		});
 	</script>
 </body>
