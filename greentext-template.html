@@ -44,6 +44,20 @@
 			--pho-tc: #333;
 			--pho-nc: #004A99;
 
+			--accw-bgc1: #F0E0D6;
+			--accw-bgc2: #FFE;
+			--accw-bd1: #D9BFB7;
+			--accw-tc: #800000;
+			--accw-nc: #117743;
+			--accw-gt: #496600;
+
+			--accc-bgc1: #D6DAF0;
+			--accc-bgc2: #EEF2FF;
+			--accc-bd1: #B7C5D9;
+			--accc-tc: #000;
+			--accc-nc: #117743;
+			--accc-gt: #496600;
+
 			--gt1: #789922;
 			--gt2: #b5bd68;
 
@@ -197,6 +211,50 @@
 			}
 			& footer{
 				border-top: 1px solid var(--pho-bd1);
+			}
+		}
+		.accessible-warm{
+			background: var(--accw-bgc2);
+			color: var(--accw-tc);
+			& .post{
+				background: var(--accw-bgc1);
+				border-color: var(--accw-bd1);
+			}
+			& .name{
+				color:var(--accw-nc);
+			}
+			& textarea{
+				font-family: var(--ff1);
+				font-size: var(--fs1);
+				color: var(--accw-gt);
+			}
+			& fieldset{
+				border-color: var(--accw-bd1);
+			}
+			& footer{
+				border-top: 1px solid var(--accw-bd1);
+			}
+		}
+		.accessible-cold{
+			background: var(--accc-bgc2);
+			color: var(--accc-tc);
+			& .post{
+				background: var(--accc-bgc1);
+				border-color: var(--accc-bd1);
+			}
+			& .name{
+				color:var(--accc-nc);
+			}
+			& textarea{
+				font-family: var(--ff1);
+				font-size: var(--fs1);
+				color: var(--accc-gt);
+			}
+			& fieldset{
+				border-color: var(--accc-bd1);
+			}
+			& footer{
+				border-top: 1px solid var(--accc-bd1);
 			}
 		}
 		header{
@@ -374,6 +432,8 @@
 						    <option value="burichan">Burichan</option>
 						    <option value="tomorrow">Tomorrow</option>
 						    <option value="photon">Photon</option>
+						    <option value="accessible-warm">Accessible Warm</option>
+						    <option value="accessible-cold">Accessible Cold</option>
 						</select>
 					</fieldset>
 			</details>
