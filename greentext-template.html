@@ -204,6 +204,8 @@
 			place-self:normal;
 		}
 		main{
+			display: flex;
+			  flex-direction: column;
 			width:100%;
 		}
 		section.first{
@@ -276,12 +278,47 @@
 			border-width: 1px;
 		}
 		footer {
+			display: flex;
+			flex-direction: column;
+			place-items: center;
 			margin-top: auto;
 			width:100%;
-			place-items:center;
 			font-size: 10px;
 		}
-
+		dialog{
+			display:none;
+			opacity:0;
+			translate: 0 -25vh;
+			transition-property: overlay display opacity;
+			transition-duration: 1s;
+			transition-behavior: allow-discrete;
+		}
+		dialog[open]{
+			display:block;
+			opacity:1;
+			translate: 0 0;
+			@starting-style{
+				opacity:0;
+				translate: 0 25vh;
+			}
+		}
+		dialog::backdrop{
+			transition-property: overlay display opacity;
+			transition-duration: 1s;
+			transition-behavior: allow-discrete;
+			opacity:0;
+			background:black;
+		}
+		dialog[open]::backdrop{
+			/*display:none;*/
+			opacity: .8;
+		}
+		@starting-style{
+			dialog[open]::backdrop{
+				opacity:0;
+				translate: 0 25vh;
+			}
+		}
 		/* only color, background-color, cursor, outline, text-decoration, text-emphasis-color and text-shadow */
 		::selection {
 			color: hsla(28, 0%, 95%, 1);
@@ -342,10 +379,15 @@
 			</details>
 		</section>
 	</main>
-
 	<footer>
 		<p>All trademarks and copyrights on this page are owned by their respective parties. Images uploaded are the responsibility of the Poster. Comments are owned by the Poster.</p>
+		<p id="footer-links"><a href="javascript:void();" class="open-modal">About</a><!-- • <a href="//www.4chan.org/feedback" target="_blank">Feedback</a> • <a href="//www.4chan.org/legal" target="_blank">Legal</a> • <a href="//www.4chan.org/contact" target="_blank">Contact</a> --></p>
 	</footer>
+	<dialog id="modal">
+		<h2>dialog modal</h2>
+		<p>i just wanted to throw this in for fun :)</p>
+		<button class="close-modal">close</button>
+	</dialog>
 
 	<script>
 		// random ID string gen
@@ -532,7 +574,19 @@
 		themeSelector.addEventListener("change", () => {
 		    body.className = themeSelector.value;
 		});
+
+		// dialog modal
+		const modal = document.querySelector("#modal");
+		const openModal = document.querySelector(".open-modal");
+		const closeModal = document.querySelector(".close-modal");
+
+		openModal.addEventListener("click", () => {
+		  modal.showModal();
+		});
+
+		closeModal.addEventListener("click", () => {
+		  modal.close();
+		});
 	</script>
 </body>
-
 </html>
